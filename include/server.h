@@ -1,29 +1,27 @@
 #ifndef _server_h
 #define _server_h
-#define DEFAULT_PORT 80
-#define DEFAULT_FAMALY AF_INET
 #include<sys/socket.h>
 #include<cstdio>
 #include<map>
 #include<cstring>
+#include "includes/config.h"
+#include "includes/route.h"
+
+// Functions to deal with different routes
+
+extern map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER, _SESSION;
 
 class server{
+
 public:
-    server();
-    server(int port, char* ip_address);
+    server(int port = DEFAULT_PORT, int ip_address = INADDR_ANY);
     ~server();
-    int listen();
-    void (*process)();
-    map<string, string> get();
-    map<string, string> post();
-    map<string, string> request();
-    map<string, string> cookie();
-    map<string, string> header();
+    void listen();
+
 private:
     struct sockaddr_in sockaddr;
     int socket_fd;
-    char buff[4096];
-    map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER;
+    route _route;
 };
 
 #endif // _server_h
