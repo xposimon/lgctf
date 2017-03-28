@@ -4,8 +4,8 @@
 #include<cstdio>
 #include<map>
 #include<cstring>
-#include "includes/config.h"
-#include "includes/route.h"
+#include "config.h"
+#include "route.h"
 
 // Functions to deal with different routes
 
