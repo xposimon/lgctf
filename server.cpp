@@ -42,4 +42,27 @@ void server::listen()
     }
     cout<<"The server is running, listening on port: "<<port<<endl;
 
+    while(1)
+    {
+        if (connect_fd = accept(socket_fd, (struct sockaddr*)NULL, NULL)) == -1)
+        {
+            cerr<<"Fail to accept raw_data!";
+            continue;
+        }
+
+        end_position = recv(connect_fd, buff, MAX_BUFFER, 0);
+        if (!fork())
+        {
+            if (send(connect_fd, "Test\n", 5, 0) == -1)
+            {
+                cerr<<"Fail to send message!";
+                close(connect_fd);
+                exit(0);
+            }
+        }
+        buff[n] = '\0';
+        cout<<"Receive message: \n"<<buff;
+        close(connect_fd);
+    }
+    close(socket_fd);
 }

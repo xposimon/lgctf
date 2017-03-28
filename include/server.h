@@ -16,11 +16,12 @@ class server{
 public:
     server(int port = DEFAULT_PORT, int ip_address = INADDR_ANY);
     ~server();
-    void listen();
+    void listen(); // Listen to a port, and parse the raw_data in HTTP
 
 private:
     struct sockaddr_in sockaddr;
-    int socket_fd;
+    char buff[MAX_BUFFER]
+    int socket_fd, connect_fd;
     route _route;
 };
 
