@@ -4,7 +4,6 @@
 #include<functional>
 #include "parser.h"
 #include "config.h"
-using namespace std;
 
 class route
 {

@@ -3,6 +3,6 @@
 int main()
 {
     server testser;
-    testser.Listen();
+    testser.listen();
 
 }

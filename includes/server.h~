@@ -20,7 +20,7 @@ class server{
 
 public:
     server(int port = DEFAULT_PORT, int ip_address = INADDR_ANY);
-    ~server();
+    //~server();
     void Listen(); // Listen to a port, and parse the raw_data in HTTP
 
 private:
