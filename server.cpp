@@ -52,7 +52,7 @@ void server::Listen()
 
     while(1)
     {
-        if (connect_fd = accept(socket_fd, (struct sockaddr*)NULL, NULL) == -1)
+        if ((connect_fd = accept(socket_fd, (struct sockaddr*)NULL, NULL)) == -1)
         {
             cerr<<"Fail to accept raw_data!";
             continue;
@@ -62,11 +62,9 @@ void server::Listen()
         if (!fork())
         {
             if (send(connect_fd, "Test", 4, 0) == -1)
-            {
                 cerr<<"Fail to send message!";
-                close(connect_fd);
-                exit(0);
-            }
+            close(connect_fd);
+            exit(0);
         }
         buff[end_position] = '\0';
         cout<<"Receive message: \n"<<buff<<endl;
