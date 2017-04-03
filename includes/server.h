@@ -14,7 +14,7 @@ using namespace std;
 
 // Functions to deal with different routes
 
-//extern map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER, _SESSION;
+
 
 class server{
 

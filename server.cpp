@@ -13,16 +13,8 @@ server::server(int port, int ip_address){
         cerr<<"Fail to create sockets!";
         exit(0);
     }
-    /*
-    /* Initialize memory
+
     memset(&sockaddr, 0, sizeof(sockaddr));
-    memset(&_GET, 0, sizeof(_GET));
-    memset(&_POST, 0, sizeof(_GET));
-    memset(&_COOKIE, 0, sizeof(_GET));
-    memset(&_REQUEST, 0, sizeof(_GET));
-    memset(&_HEADER, 0, sizeof(_GET));
-    memset(&_SESSION, 0, sizeof(_GET));
-    */
     // Initialize IP address
     sockaddr.sin_family = AF_INET;
     sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -57,7 +49,7 @@ void server::Listen()
             cerr<<"Fail to accept raw_data!";
             continue;
         }
-	
+
         int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);
         if (!fork())
         {

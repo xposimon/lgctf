@@ -1,28 +1,22 @@
-#include<cstdio>
-#include<iostream>
-#include<map>
-#include<cstring>
-#include<functional>
-using namespace std;
-class A;
+#include <iostream>
+#include <regex>
+#include <string>
 
-
-class A{
-public:
-    A(){
-        a = 10;
+int main()
+{
+    std::string tmp,html;
+    while(getline(std::cin,tmp))
+    {
+        tmp += '\n';
+        html += tmp;
     }
-    int a;
-    std::function<void()> test;
-    std::function<void()> bind_path(string name){
-        return [=]{cout<<name;};
+    std::string pattern("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
+    pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
+    std::regex r(pattern);
+    for (std::sregex_iterator it(html.begin(), html.end(), r), end;
+        it != end;
+        ++it)
+    {
+        std::cout << it->str() << std::endl;
     }
-};
-
-
-int main(){
-    A atest;
-    atest.test = atest.bind_path((string)"yes!");
-    atest.test();
-    return 0;
 }
