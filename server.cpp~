@@ -67,7 +67,5 @@ void server::Listen()
 
 string server::get_response(string content)
 {
-    parser server_parser;
-    server_parser.request_parse(content);
-    
+
 }

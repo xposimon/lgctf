@@ -3,5 +3,4 @@ Fix the issue that the binded port is different from the port inputed.
 It's because different endians, Ubuntu uses little-endian, so htons is needed to change port to big-endian.
 
 # 2017/4/17
-The parser to parse parameters is finished. 
-Server can parse requests and send back response.
+The parser to parse parameters is finished. Server can parse requests and send back response.

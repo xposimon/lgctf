@@ -12,13 +12,13 @@ class parser
 {
 public:
     parser();
-    parser(string content);
     void request_parse(string content);
     map<string, string> get(string env_name);
+    void parse_params(string params)
 private:
     map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER;
     map<string, string> pattern;
-    string method;
+    string method, path, http_version;
     regex re;
 };
 
