@@ -3,6 +3,7 @@
 #include<cstring>
 #include<map>
 #include<vector>
+#include<iostream>
 #include<boost/regex.hpp>
 #include<boost/algorithm/string.hpp>
 using namespace std;
@@ -13,8 +14,8 @@ class parser
 public:
     parser();
     void request_parse(string content);
-    map<string, string> get(string env_name);
-    void parse_params(string params)
+    map<string, string> get(string env);
+    void parse_params(string method, string params);
 private:
     map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER;
     map<string, string> pattern;

@@ -4,17 +4,10 @@ using namespace std;
 using namespace boost;
 
 parser::parser()
-{
-    /*mem init*/
-    memset(&_GET, 0, sizeof(_GET));
-    memset(&_POST, 0, sizeof(_GET));
-    memset(&_COOKIE, 0, sizeof(_GET));
-    memset(&_REQUEST, 0, sizeof(_GET));
-    memset(&_HEADER, 0, sizeof(_GET));
-    
+{  
     /*pattern init*/
-    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9]+)*)?\\sHTTP/(1.1|1.0|2.0)";
-    pattern["header"] = "^[A-Za-z0-9\\-]+ *: *([^\\s]*)$";
+    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
+    pattern["header"] = "^([A-Za-z0-9\\-]+) *: *([^\\s]*)$";
 
 }
 
@@ -32,8 +25,8 @@ void parser::parse_params(string method,string params)
     string::const_iterator end = params.end();
     while ( regex_search(start, end, result, para_pattern))
     {
-        (*para)[result[1]] = result[2];
-        _REQUEST[result[1]] = result[2];
+        (*para)[result[1].str()] = result[2].str();
+        _REQUEST[result[1].str()] = result[2].str();
         start = result[0].second;
     }
 
@@ -43,7 +36,7 @@ void parser::parse_params(string method,string params)
 
 void parser::request_parse(string content)
 {
-    string params, path
+    string params, tmp;
     vector<string> lines;
     smatch result;
     split(lines, content, is_any_of("\n"),token_compress_on);
@@ -51,14 +44,18 @@ void parser::request_parse(string content)
 
     string request_method = trim(*it);
     re.assign(pattern["method"]);
+    //cout<<request_method<<endl;
 
     if (regex_match(request_method, result, re))
     {
+        //cout<<result[0]<<endl;
         method = result[1];
         path = result[2];
 	params = result[3];
 	http_version = result[4];
+        
 	parse_params(method, params);
+        //cout<<_GET["id"]<<endl;
     }
     else
     {
@@ -69,42 +66,36 @@ void parser::request_parse(string content)
     re.assign(pattern["header"]);
     for (; it != lines.end(); it++)
     {
-        string tmp = trim(*it);
-        
+        tmp = trim(*it);
+        //cout<<tmp<<endl;
         if ( regex_match(tmp, result, re))
         {
-            _HEADER[result[1]] = result[2];
+            _HEADER[result[1].str()] = result[2].str();
             toLowerString(tmp=result[1]);
+            
             if (tmp == "cookie")
             {
-                _COOKIE[result[1]] = result[2];
-                _REQUEST[result[1]] = result[2];
+                _COOKIE[result[1].str()] = result[2].str();
+                _REQUEST[result[1].str()] = result[2].str();
             }
         }
     }
 }
 
 
-
-map<string, string> get(string env_name)
+map<string, string> parser::get(string env)
 {
+    string env_name = env;
+    
     toLowerString(env_name);
-    switch (env_name)
-    {
-        case "get":
-        {return _GET;break;}
-        case "post":
-        {return _POST;break;}
-        case "request":
-        {return _REQUEST;break;}
-        case "header":
-        {return _HEADER;break;}
-        case "cookie":
-        {return _COOKIE;break;}
-        default:
-        {
+    
+    if (env_name == "get")return _GET;
+    else if (env_name == "post")return _POST;
+    else if (env_name=="request")return _REQUEST;
+    else if (env_name=="header")return _HEADER;
+    else if (env_name=="cookie")return _COOKIE;
+    else{
             cerr<<"Not defined environment variable!";
-            return ;
+            return _HEADER;
         }
-    }
 }
