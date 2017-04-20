@@ -57,8 +57,12 @@ void parser::request_parse(string content)
 <<<<<<< HEAD
 	parse_params(string("GET"), params);
 =======
+<<<<<<< HEAD
+	parse_params(string("GET"), params);
+=======
 	parse_params(method, params);
 >>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
         //cout<<_GET["id"]<<endl;
     }
     else
@@ -78,6 +82,9 @@ void parser::request_parse(string content)
             toLowerString(tmp=result[1]);
 <<<<<<< HEAD
             cout<<tmp<<endl;
+=======
+<<<<<<< HEAD
+            cout<<tmp<<endl;
             if (tmp == "cookie")
             {
 		cout<<tmp<<endl;
@@ -92,13 +99,23 @@ void parser::request_parse(string content)
         }
 =======
             
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
             if (tmp == "cookie")
             {
-                _COOKIE[result[1].str()] = result[2].str();
-                _REQUEST[result[1].str()] = result[2].str();
+		cout<<tmp<<endl;
+                //_COOKIE[result[1].str()] = result[2].str();
+                //_REQUEST[result[1].str()] = result[2].str();
+                //cookie_parse(tmp);
             }
         }
+<<<<<<< HEAD
+        else if (method == "POST" && regex_search(tmp, result, regex("^([A-Za-z0-9]+)=([A-Za-z0-9]+)")))
+        {
+            parse_params(string("POST"), tmp);
+        }
+=======
 >>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
     }
 }
 

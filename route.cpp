@@ -1,19 +1,29 @@
-#include<string.h>
-#include<functional>
 #include "includes/route.h"
-using namespace std;
 
 route::route()
 {
-    memset(in_raw_data, 0, sizeof(in_raw_data));
-    memset(out_raw_data, 0, sizeof(out_raw_data));
 }
 
 route::~route()
 {
 }
 
-function<void()> route::trace(string path)
+string route::trace(string path)
 {
+    if (map.count(path)>0)
+        return (*routes[path])();
+    else
+    {
+        // no path error
+    }
+}
 
+void route::bind_path(string path, *function<string()>)
+{
+    if (!dealer)
+        routes[path] = dealer;
+    else
+    {
+        // null pointer error
+    }
 }

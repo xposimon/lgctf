@@ -7,7 +7,11 @@
 <<<<<<< HEAD
 #include "includes/render.h"
 =======
+<<<<<<< HEAD
+#include "includes/render.h"
+=======
 >>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
 
 server::server(int port, int ip_address){
 
@@ -79,17 +83,26 @@ string server::get_response(string content)
 <<<<<<< HEAD
     /*parser server_parser;
 =======
+<<<<<<< HEAD
+    /*parser server_parser;
+=======
     parser server_parser;
 >>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
     string answer = "The response of get['id'] is: ";
 
     server_parser.request_parse(content);
     answer += server_parser.get(string("get"))["id"]; 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
     answer += "The post data username is ";
     answer += server_parser.get(string("post"))["username"];
     answer += "The user is ";
     answer += server_parser.get(string("cookie"))["user"];
+<<<<<<< HEAD
+=======
     
     return answer; */
     render output;
@@ -102,7 +115,19 @@ string server::get_response(string content)
 
 
 =======
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
     
-    return answer; 
+    return answer; */
+    render output;
+    string tmp;
+    tmp = "<html><head><script></script></head><body><p>Hello, { name }!</p></body></html>";
+    map<string, string> param;
+    param["name"] = "Simon";
+    return output.render_from_string(tmp, param);
 }
+<<<<<<< HEAD
+
+
+=======
 >>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
+>>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
