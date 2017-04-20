@@ -54,7 +54,11 @@ void parser::request_parse(string content)
 	params = result[3];
 	http_version = result[4];
         
+<<<<<<< HEAD
 	parse_params(string("GET"), params);
+=======
+	parse_params(method, params);
+>>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
         //cout<<_GET["id"]<<endl;
     }
     else
@@ -72,6 +76,7 @@ void parser::request_parse(string content)
         {
             _HEADER[result[1].str()] = result[2].str();
             toLowerString(tmp=result[1]);
+<<<<<<< HEAD
             cout<<tmp<<endl;
             if (tmp == "cookie")
             {
@@ -85,6 +90,15 @@ void parser::request_parse(string content)
         {
             parse_params(string("POST"), tmp);
         }
+=======
+            
+            if (tmp == "cookie")
+            {
+                _COOKIE[result[1].str()] = result[2].str();
+                _REQUEST[result[1].str()] = result[2].str();
+            }
+        }
+>>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
     }
 }
 

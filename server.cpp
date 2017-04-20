@@ -4,7 +4,10 @@
 #include<netinet/in.h>
 #include "includes/server.h"
 #include "includes/parser.h"
+<<<<<<< HEAD
 #include "includes/render.h"
+=======
+>>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
 
 server::server(int port, int ip_address){
 
@@ -73,11 +76,16 @@ void server::Listen()
 
 string server::get_response(string content)
 {
+<<<<<<< HEAD
     /*parser server_parser;
+=======
+    parser server_parser;
+>>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
     string answer = "The response of get['id'] is: ";
 
     server_parser.request_parse(content);
     answer += server_parser.get(string("get"))["id"]; 
+<<<<<<< HEAD
     answer += "The post data username is ";
     answer += server_parser.get(string("post"))["username"];
     answer += "The user is ";
@@ -93,3 +101,8 @@ string server::get_response(string content)
 }
 
 
+=======
+    
+    return answer; 
+}
+>>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
