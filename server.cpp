@@ -3,7 +3,8 @@
 #include<sys/types.h>
 #include<netinet/in.h>
 #include "includes/server.h"
-
+#include "includes/parser.h"
+#include "includes/render.h"
 
 server::server(int port, int ip_address){
 
@@ -28,10 +29,13 @@ server::server(int port, int ip_address){
     }
 }
 
+
 server::~server()
 {
     close(socket_fd);
 }
+
+
 void server::Listen()
 {
     if (listen(socket_fd, MAX_CONNECTIONS) == -1)
@@ -49,11 +53,13 @@ void server::Listen()
             cerr<<"Fail to accept raw_data!";
             continue;
         }
-
+        
         int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);
+        string response = get_response(string(buff));
+        //cout<<"The answer len is: "<<response.size()<<endl; 
         if (!fork())
         {
-            if (send(connect_fd, "Simon\n", 7,0) == -1)
+            if (send(connect_fd, response.c_str(), response.size()+1,0) == -1)
                 cerr<<"Fail to send message!";
             close(connect_fd);
             exit(0);
@@ -63,3 +69,27 @@ void server::Listen()
         close(connect_fd);
     }
 }
+
+
+string server::get_response(string content)
+{
+    /*parser server_parser;
+    string answer = "The response of get['id'] is: ";
+
+    server_parser.request_parse(content);
+    answer += server_parser.get(string("get"))["id"]; 
+    answer += "The post data username is ";
+    answer += server_parser.get(string("post"))["username"];
+    answer += "The user is ";
+    answer += server_parser.get(string("cookie"))["user"];
+    
+    return answer; */
+    render output;
+    string tmp;
+    tmp = "<html><head><script></script></head><body><p>Hello, { name }!</p></body></html>";
+    map<string, string> param;
+    param["name"] = "Simon";
+    return output.render_from_string(tmp, param);
+}
+
+

@@ -7,4 +7,8 @@ using namespace std;
 
 void toLowerString(string &str);
 
+string &ltrim(string &s);
+string &rtrim(string &s);
+string &trim(string &s);
+
 #endif // _functions_h

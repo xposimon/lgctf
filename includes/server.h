@@ -22,6 +22,7 @@ public:
     server(int port = DEFAULT_PORT, int ip_address = INADDR_ANY);
     ~server();
     void Listen(); // Listen to a port, and parse the raw_data in HTTP
+    string get_response(string content);
 
 private:
     struct sockaddr_in sockaddr;

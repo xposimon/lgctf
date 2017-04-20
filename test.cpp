@@ -1,22 +1,23 @@
+#include <assert.h>
 #include <iostream>
-#include <regex>
-#include <string>
+#include <vector>
+#include <boost/regex.hpp>
+#include <boost/algorithm/string_regex.hpp>
+#include <iomanip>
+#include <map>
+using namespace std;
+using namespace boost;
 
 int main()
 {
-    std::string tmp,html;
-    while(getline(std::cin,tmp))
-    {
-        tmp += '\n';
-        html += tmp;
-    }
-    std::string pattern("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
-    pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
-    std::regex r(pattern);
-    for (std::sregex_iterator it(html.begin(), html.end(), r), end;
-        it != end;
-        ++it)
-    {
-        std::cout << it->str() << std::endl;
-    }
+    vector<string> parsed_params;
+    regex para_pattern("([A-Za-z0-9]+)=([A-Za-z0-9]+)");
+    smatch result;
+    map<string, string> para;
+    string params;
+    params = "?id=1&name=simon&user=xpo";
+    string tmp = params;
+    replace_all_regex(tmp, para_pattern, string("wahoo"));
+    cout<<tmp<<endl;
+
 }
