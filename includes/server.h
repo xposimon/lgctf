@@ -23,7 +23,8 @@ public:
     ~server();
     void Listen(); // Listen to a port, and parse the raw_data in HTTP
     string get_response(string content);
-
+	map<string, string> _GET, _POST, _REQUEST, _COOKIE, _HEADER;
+	//session _SESSION;
 private:
     struct sockaddr_in sockaddr;
     char buff[MAX_BUFFER];
