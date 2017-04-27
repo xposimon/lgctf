@@ -52,10 +52,9 @@ void parser::request_parse(string content)
         //cout<<result[0]<<endl;
         method = result[1];
         path = result[2];
-		params = result[3];
-		http_version = result[4];
-			
-		parse_params(string("GET"), params);
+	    params = result[3];
+	    http_version = result[4];
+	    parse_params(string("GET"), params);
 
         //cout<<_GET["id"]<<endl;
     }
@@ -77,7 +76,7 @@ void parser::request_parse(string content)
             cout<<tmp<<endl;
             if (tmp == "cookie")
             {
-				cout<<tmp<<endl;
+		cout<<tmp<<endl;
                 parse_params(string("COOKIE"), result[2].str());
             }
         }

@@ -59,7 +59,7 @@ void server::Listen()
         //cout<<"The answer len is: "<<response.size()<<endl; 
         if (!fork())
         {
-            if (send(connect_fd, response.c_str(), response.size()+1,0) == -1)
+            if (send(connect_fd, response.c_str(), response.size(),0) == -1)
                 cerr<<"Fail to send message!";
             close(connect_fd);
             exit(0);
@@ -73,10 +73,14 @@ void server::Listen()
 
 string server::get_response(string content)
 {
+    /*
     render output;
     string tmp;
     tmp = "<html><head><script></script></head><body><p>Hello, { name }!</p></body></html>";
     map<string, string> param;
     param["name"] = "Simon";
-    return output.render_from_string(tmp, param);
+    return output.render_from_string(tmp, param);*/
+    parser test;
+    test.request_parse(content);
+    return test.get(string("cookie"))["123"];
 }
