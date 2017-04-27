@@ -18,9 +18,10 @@ void parser::parse_params(string method,string params)
     smatch result;
     map<string, string> *para;
 
-    if (method == "GET" || method == "get") para = &_GET;
-    else if (method == "POST" || method == "post") para = &_POST;
-
+    if (method == "GET") para = &_GET;
+    else if (method == "POST") para = &_POST;
+	else if (method == "COOKIE") para = &_COOKIE;
+	
     string::const_iterator start = params.begin();
     string::const_iterator end = params.end();
     while ( regex_search(start, end, result, para_pattern))
@@ -51,18 +52,11 @@ void parser::request_parse(string content)
         //cout<<result[0]<<endl;
         method = result[1];
         path = result[2];
-	params = result[3];
-	http_version = result[4];
-        
-<<<<<<< HEAD
-	parse_params(string("GET"), params);
-=======
-<<<<<<< HEAD
-	parse_params(string("GET"), params);
-=======
-	parse_params(method, params);
->>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
->>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
+		params = result[3];
+		http_version = result[4];
+			
+		parse_params(string("GET"), params);
+
         //cout<<_GET["id"]<<endl;
     }
     else
@@ -80,44 +74,20 @@ void parser::request_parse(string content)
         {
             _HEADER[result[1].str()] = result[2].str();
             toLowerString(tmp=result[1]);
-<<<<<<< HEAD
-            cout<<tmp<<endl;
-=======
-<<<<<<< HEAD
             cout<<tmp<<endl;
             if (tmp == "cookie")
             {
-		cout<<tmp<<endl;
-                //_COOKIE[result[1].str()] = result[2].str();
-                //_REQUEST[result[1].str()] = result[2].str();
-                //cookie_parse(tmp);
+				cout<<tmp<<endl;
+                parse_params(string("COOKIE"), result[2].str());
             }
         }
         else if (method == "POST" && regex_search(tmp, result, regex("^([A-Za-z0-9]+)=([A-Za-z0-9]+)")))
         {
             parse_params(string("POST"), tmp);
         }
-=======
-            
->>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
-            if (tmp == "cookie")
-            {
-		cout<<tmp<<endl;
-                //_COOKIE[result[1].str()] = result[2].str();
-                //_REQUEST[result[1].str()] = result[2].str();
-                //cookie_parse(tmp);
-            }
-        }
-<<<<<<< HEAD
-        else if (method == "POST" && regex_search(tmp, result, regex("^([A-Za-z0-9]+)=([A-Za-z0-9]+)")))
-        {
-            parse_params(string("POST"), tmp);
-        }
-=======
->>>>>>> 44c6c003271ba69413dd0c52bd7de334b0b15442
->>>>>>> cbcf52ce625c9d3470479dcccf37b5b93152e35e
-    }
+	}
 }
+
 
 
 map<string, string> parser::get(string env)
