@@ -1,17 +1,33 @@
 #ifndef _session_h
 #define _session_h
 #include<cstring>
+#include<fstream>
+#include<iostream>
+#include<ctime>
+#include<cstdlib>
+#include "heap.h"
+#include "functions.h"
+#include "config.h"
+#include<boost/regex.hpp>
+#include<boost/algorithm/string.hpp>
 using namespace std;
+using namespace boost;
+typedef map<string, string> mss;
 
 class session
 {
 public:
 	session();
-	map<string ,string> & operator [](char *s);
-	map<string, string> & operator [](string s);
+	void load(string session_id);
+	void save(string session_id, heap<string> &schedule, int expire_time = 60);
+	void insert(string sess_key, string sess_value, heap<string> &schedule);
+	string serialize(mss &session_map);
+	mss unserialize(string &content);
+	string & operator [](char *s);
+	string & operator [](string s);
 private:
-	map<string, string> cache;
-}
+	mss cache;
+};
 
 
 #endif

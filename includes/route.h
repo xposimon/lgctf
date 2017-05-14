@@ -4,7 +4,7 @@
 #include<functional>
 #include "parser.h"
 #include "config.h"
-using namespace std;
+#include "error.h"
 
 class route
 {
@@ -13,11 +13,11 @@ public:
     ~route();
     string trace(string path);
     // routes function can only be string function(), (return string, no parameters)
-    void bind_path(string path, function<string()> *dealer);
+    void bind_path(string path, string(*dealer)());
 private:
     string in_raw_data;
     string out_raw_data;
-    map< string, *function<string()>> routes;
+    map< string, std::function<string()>*> routes;
 };
 
 #endif // _route_h

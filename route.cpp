@@ -6,24 +6,26 @@ route::route()
 
 route::~route()
 {
+    for (map< string, std::function<string()>*>::iterator itr = routes.begin(); itr != routes.end(); itr++)
+    {
+        delete itr->second;
+    }
+    routes.clear();
 }
 
 string route::trace(string path)
 {
-    if (map.count(path)>0)
+    if (routes.count(path)>0)
         return (*routes[path])();
     else
     {
-        // no path error
+        return error(string("404"));
     }
 }
 
-void route::bind_path(string path, *function<string()>)
+void route::bind_path(string path, string(*dealer)())
 {
-    if (!dealer)
-        routes[path] = dealer;
-    else
-    {
-        // null pointer error
-    }
+    std::function<string()> *t = new std::function<string()>;
+    *t = std::function<string()>(dealer);
+    routes[path] = t;
 }

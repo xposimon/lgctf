@@ -43,7 +43,7 @@ void parser::request_parse(string content)
     split(lines, content, is_any_of("\n"),token_compress_on);
     vector<string>::iterator it = lines.begin();
 
-    string request_method = trim(*it);
+    string request_method = Trim(*it);
     re.assign(pattern["method"]);
     //cout<<request_method<<endl;
 
@@ -67,7 +67,7 @@ void parser::request_parse(string content)
     re.assign(pattern["header"]);
     for (; it != lines.end(); it++)
     {
-        tmp = trim(*it);
+        tmp = Trim(*it);
         //cout<<tmp<<endl;
         if ( regex_match(tmp, result, re))
         {
@@ -86,8 +86,6 @@ void parser::request_parse(string content)
         }
 	}
 }
-
-
 
 map<string, string> parser::get(string env)
 {

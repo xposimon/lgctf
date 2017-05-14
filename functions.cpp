@@ -1,4 +1,5 @@
 #include "includes/functions.h"
+#include<iostream>
 using namespace std;
 
 void toLowerString(string &str)
@@ -18,9 +19,35 @@ string &rtrim(string &s)
     return s;
 }
 
-string &trim(string &s)
+string &Trim(string &s)
 {
     return ltrim(rtrim(s));
+}
+
+string generate_name()
+{
+	srand(time(NULL));
+	string characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFHHIJKLMNOPQRSTUVWXYZ";
+	string gen = "";
+	for(int i = 0; i<20; i++)
+	{
+		gen += characters[rand()%62];
+	}
+	return gen;
+}
+
+string to_String(int n)
+{
+    string tmp = "";
+    int ca = n;
+    while (ca>0)
+    {
+        tmp = (char)('0'+ca%10) + tmp;
+        ca /= 10;
+        
+    }
+    
+    return tmp;
 }
 
 
