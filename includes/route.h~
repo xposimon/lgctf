@@ -16,7 +16,7 @@ class route
 public:
     route();
     ~route();
-    string trace(string path, map<string,string> &headers);
+    string trace(string path);
     // routes function can only be string function(), (return string, no parameters)
     void bind_path(string path, string(*dealer)());
 private:

@@ -7,11 +7,11 @@
 #define TEMPLATE_PATH "./template/"
 #define SESSION_PATH "./sess_tmp/"
 #define LOG_PATH "./log/"
-#define mysql_user "root"
-#define mysql_pass "root"
-#define mysql_port 3306
-#define mysql_addr "localhost"
-#define mysql_dbname "oj_db"
+#define mysql_user 
+#define mysql_pass
+#define mysql_port
+#define mysql_addr
+#define mysql_dbname
 
 #endif // _config_h
 

@@ -6,7 +6,7 @@ using namespace boost;
 parser::parser()
 {  
     /*pattern init*/
-    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\.]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
+    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\./]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
     pattern["header"] = "^([A-Za-z0-9\\-]+) *: *([^\\s]*)$";
 
 }

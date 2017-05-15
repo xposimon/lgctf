@@ -1,0 +1,23 @@
+#ifndef database_h
+#define database_h
+#include<iostream>
+#include<vector>
+#include<mysql.h>
+#include "config.h"
+#include "error.h"
+using namespace std;
+
+class imysql
+{
+public: 
+    imysql();
+    ~imysql();
+    void select(string column, string from, string wherename, vector<string> params);
+    void insert(string table, vector<string> values);
+    void update(string table, string column, string value);
+private:
+    MYSQL *conn;
+}
+
+
+#endif

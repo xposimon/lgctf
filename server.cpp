@@ -63,13 +63,17 @@ void server::Listen()
             cerr<<"Fail to accept raw_data!";
             continue;
         }
-        cout<<inet_ntoa(clientaddr.sin_addr)<<endl;
-
-        int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);
-        string response = get_response(string(buff));
+        
+        int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);        
         //cout<<"The answer len is: "<<response.size()<<endl; 
         if (!fork())
         {
+            string ip_info = inet_ntoa(clientaddr.sin_addr);
+            string tmp = string(buff);
+            int first_line = tmp.find("\n");
+            Log newlog;
+            newlog.access_log(ip_info + " " + tmp.substr(0, first_line));
+            string response = get_response(string(buff));
             if (send(connect_fd, response.c_str(), response.size(),0) == -1)
                 cerr<<"Fail to send message!";
             close(connect_fd);
@@ -115,6 +119,6 @@ string server::get_response(string content)
 {
     _parser.request_parse(content);
     string response;
-    response = _route.trace(_parser.path);
-    return response;
+    response = _route.trace(_parser.path, response_header);
+    return add_header(response, _parser.http_version);
 }

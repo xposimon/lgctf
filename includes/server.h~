@@ -14,7 +14,6 @@
 #include "parser.h"
 #include "render.h"
 #include "route.h"
-#include "Log.h"
 using namespace std;
 
 // Functions to deal with different routes

@@ -42,8 +42,9 @@ string render::render_from_template(string temp_name, map<string, string> param)
     {
         // file open error
     }
-    string content;
-    infile>>content;
-    
+    std::stringstream buffer;  
+    buffer << infile.rdbuf();  
+    std::string content(buffer.str());  
+    infile.close();
     return render_from_string(content, param);
 }

@@ -13,13 +13,24 @@ route::~route()
     routes.clear();
 }
 
-string route::trace(string path)
+string route::trace(string path, map<string,string> &headers)
 {
     if (routes.count(path)>0)
         return (*routes[path])();
     else
     {
-        return error(string("404"));
+    // images, videos, files should be different
+        regex file_pattern(".*(.js)|(.css)$");
+        smatch result;
+        cout<<"!!!!!!"<<path;
+        if (regex_match(path, result, file_pattern))
+        {
+            render newrender;
+            map<string,string> none;
+            string tmp = newrender.render_from_template(string("../"+path), none);
+            if (!tmp.empty()) return tmp;
+        }
+        return error(string("404"), path);
     }
 }
 
