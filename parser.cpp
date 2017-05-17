@@ -45,18 +45,18 @@ void parser::request_parse(string content)
 
     string request_method = Trim(*it);
     re.assign(pattern["method"]);
-    //cout<<request_method<<endl;
+  
 
     if (regex_match(request_method, result, re))
     {
-        //cout<<result[0]<<endl;
+       
         method = result[1];
         path = result[2];
 	    params = result[3];
 	    http_version = result[4];
 	    parse_params(string("GET"), params);
 
-        //cout<<_GET["id"]<<endl;
+       
     }
     else
     {
@@ -68,15 +68,15 @@ void parser::request_parse(string content)
     for (; it != lines.end(); it++)
     {
         tmp = Trim(*it);
-        //cout<<tmp<<endl;
+      
         if ( regex_match(tmp, result, re))
         {
             _HEADER[result[1].str()] = result[2].str();
             toLowerString(tmp=result[1]);
-            cout<<tmp<<endl;
+            
             if (tmp == "cookie")
             {
-		cout<<tmp<<endl;
+	
                 parse_params(string("COOKIE"), result[2].str());
             }
         }

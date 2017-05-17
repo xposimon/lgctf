@@ -18,6 +18,7 @@ public:
     int size() const;
     bool isEmpty() const;
     bool clear();
+    bool find(T find_value) const;
     bool enqueue(T value);
     T dequeue();
     int peek();
@@ -43,6 +44,17 @@ template<typename T>
 bool heap<T>::isEmpty() const
 {
     return (data.size()==0);
+}
+
+template<typename T>
+bool heap<T>::find(T find_value) const
+{
+    for (int i = 0; i < data.size(); i++)
+    {
+        cout<<data[i].value<<" "<<find_value<<endl;
+        if(data[i].value == find_value) return true;
+    }
+    return false;
 }
 
 template<typename T>

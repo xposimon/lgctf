@@ -28,9 +28,10 @@ server::server(int port, int ip_address){
         exit(0);
     }  
     
-    response_header[string("Server")] = string("mini_server 0.1");
-    response_header[string("Content-Type")] = string("text/html; charset=utf-8");
-    response_header[string("Connection")] =  string("keep-alive");
+    config_header[string("Server")] = string("mini_server 0.1");
+    config_header[string("Content-Type")] = string("text/html; charset=utf-8");
+    config_header[string("Connection")] =  string("keep-alive");
+    response_header = config_header;
 }
 
 
@@ -66,6 +67,8 @@ void server::Listen()
         
         int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);        
         //cout<<"The answer len is: "<<response.size()<<endl; 
+        session_manager();
+	string response = get_response(string(buff)); // process communication! a difficult part.
         if (!fork())
         {
             string ip_info = inet_ntoa(clientaddr.sin_addr);
@@ -73,7 +76,7 @@ void server::Listen()
             int first_line = tmp.find("\n");
             Log newlog;
             newlog.access_log(ip_info + " " + tmp.substr(0, first_line));
-            string response = get_response(string(buff));
+            
             if (send(connect_fd, response.c_str(), response.size(),0) == -1)
                 cerr<<"Fail to send message!";
             close(connect_fd);
@@ -117,7 +120,16 @@ string server::add_header(string response, string version)
 
 string server::get_response(string content)
 {
+    string id = _SESSION.newSession();
+    _SESSION[string("test")] = string("123");
+    _SESSION.save(id, session_schedule);
+
     _parser.request_parse(content);
+    _GET = _parser.get("get"); _POST = _parser.get("post");
+    _COOKIE = _parser.get("cookie"); _HEADER = _parser.get("header");
+    _REQUEST = _parser.get("request");
+
+    response_header = config_header;
     string response;
     response = _route.trace(_parser.path, response_header);
     return add_header(response, _parser.http_version);

@@ -12,7 +12,7 @@ class imysql
 public: 
     imysql();
     ~imysql();
-
+    void insertUser();
 private:
     MYSQL *conn;
 }

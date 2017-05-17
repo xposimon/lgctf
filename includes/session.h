@@ -20,13 +20,14 @@ public:
 	session();
 	void load(string session_id);
 	void save(string session_id, heap<string> &schedule, int expire_time = 60);
-	void insert(string sess_key, string sess_value, heap<string> &schedule);
+	string newSession();
 	string serialize(mss &session_map);
 	mss unserialize(string &content);
 	string & operator [](char *s);
 	string & operator [](string s);
 private:
 	mss cache;
+        string no_element;
 };
 
 

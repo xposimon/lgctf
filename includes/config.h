@@ -5,7 +5,7 @@
 #define MAX_BUFFER 40960
 #define MAX_CONNECTIONS 100
 #define TEMPLATE_PATH "./template/"
-#define SESSION_PATH "./sess_tmp/"
+#define SESSION_PATH "./sess/"
 #define LOG_PATH "./log/"
 #define mysql_user "root"
 #define mysql_pass "root"

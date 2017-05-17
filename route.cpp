@@ -20,13 +20,14 @@ string route::trace(string path, map<string,string> &headers)
     else
     {
     // images, videos, files should be different
-        regex file_pattern(".*(.js)|(.css)$");
+        regex file_pattern(".*((.js)|(.css))$");
         smatch result;
         cout<<"!!!!!!"<<path;
         if (regex_match(path, result, file_pattern))
         {
             render newrender;
             map<string,string> none;
+            headers["Content-Type"]="text/plain; charset=utf-8";
             string tmp = newrender.render_from_template(string("../"+path), none);
             if (!tmp.empty()) return tmp;
         }

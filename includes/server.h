@@ -37,7 +37,7 @@ private:
     char buff[MAX_BUFFER];
     int socket_fd, connect_fd;
     parser _parser;
-    map<string, string> response_header;
+    map<string, string> response_header, config_header;
     string add_header(string response, string version);
 };
 

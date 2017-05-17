@@ -3,6 +3,7 @@
 session::session()
 {
 	cache.clear();
+        no_element = "No such key";
 }
 
 string session::serialize(mss &session_map)
@@ -37,8 +38,9 @@ mss session::unserialize(string &content)
 
 void session::load(string session_id)
 {
-        string tmp_session_id = SESSION_PATH + session_id;
-	ifstream session_in(tmp_session_id.c_str());
+	ifstream session_in;
+        cout<<session_id;
+        session_in.open(session_id.c_str());
 	string content;
 	session_in>>content;
 	cache = unserialize(content);
@@ -47,11 +49,12 @@ void session::load(string session_id)
 
 void session::save(string session_id, heap<string> &schedule, int expire_time)
 {
-        string tmp_session_id = SESSION_PATH + session_id;
-	ofstream session_out(tmp_session_id.c_str());
+	ofstream outfile;
+        outfile.open(session_id.c_str());
 	string content = serialize(cache);
-	session_out<<content;
-	
+	outfile<<content;
+	outfile.close();
+        
 	int expired_time = time(NULL) + expire_time;
 	
 	for (int i = 0; i < schedule.size(); i++)
@@ -79,7 +82,7 @@ string & session::operator [](string s)
 	}
 	mss::iterator itr = cache.find(s);
 	if (itr == cache.end())
-        {/*error*/}
+        {return no_element;}
 	else 
 	{
 		return itr->second;
@@ -87,9 +90,9 @@ string & session::operator [](string s)
 }
 
 
-void session::insert(string sess_key, string sess_value, heap<string> &schedule)
+string session::newSession()
 {
-	cache[sess_key] = sess_value;
+	cache.clear();
 	string rname = generate_name();
-	save(rname, schedule);
+	return rname;
 }
