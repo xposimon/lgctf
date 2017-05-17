@@ -16,3 +16,7 @@ Session , error, route and log are finished. The rest job is the access_log and 
 
 # 2017/5/15
 Fix some problems in route(trace for common file). Now the the website can be viewed without images. Database is considered to be the functions used in app.cpp.
+
+# 2017/5/17
+The session is a difficult part. The multiprocess contradicts with the sharing of session_schedule. And there is unkown pro that the session_tmp file cannot be written into 
+sub dir. 
