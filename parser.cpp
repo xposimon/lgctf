@@ -6,7 +6,7 @@ using namespace boost;
 parser::parser()
 {  
     /*pattern init*/
-    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\./]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
+    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\./]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9%_\\.]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9%_\\.]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
     pattern["header"] = "^([A-Za-z0-9\\-]+) *: *([^\\s]*)$";
 
 }
@@ -37,6 +37,9 @@ void parser::parse_params(string method,string params)
 
 void parser::request_parse(string content)
 {
+    _GET.clear(); _POST.clear();
+    _REQUEST.clear(); _HEADER.clear();
+    _COOKIE.clear();
     string params, tmp;
     vector<string> lines;
     smatch result;

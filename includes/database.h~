@@ -17,6 +17,7 @@ public:
     void execute(string sql);
     int count_rows();
     MYSQL_ROW get_next_row();
+    void close();
 private:
     MYSQL conn;
     MYSQL_RES *result;

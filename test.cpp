@@ -2,24 +2,46 @@
 #include<iostream>
 #include<fstream>
 #include<boost/regex.hpp>
-#include<boost/algorithm/string.hpp>
 #include<cstring>
-#include<map>
+#include<iostream>
 using namespace std;
-using namespace boost;
-int main(){
-    string content = "{\"test\":\"123\"}";
-regex para_pattern("{\"([A-Za-z0-9_]+)\":\"([A-Za-z0-9_]+)\"}");
-    smatch result;
-    map<string,string> para;
 
-    string::const_iterator start = content.begin();
-    string::const_iterator end = content.end();
-    cout<<content;
-    while ( regex_search(start, end, result, para_pattern))
+int hex_char_value(char c)     
+{     
+    if(c >= '0' && c <= '9')     
+        return c - '0';     
+    else if(c >= 'a' && c <= 'f')     
+        return (c - 'a' + 10);     
+    else if(c >= 'A' && c <= 'F')     
+        return (c - 'A' + 10);     
+    assert(0);     
+    return 0;     
+}     
+
+int smallpow(int base, int power)
+{
+    int tmp = 1;
+    int count = power;
+    while ( power-- > 0)
     {
-        cout<<result[0];
-        para[result[1].str()] = result[2].str();
-        start = result[0].second;
+        tmp *= base;
     }
+    return tmp;
+}
+
+int hex_to_dec(string hex)     
+{     
+    int result = 0;     
+    int len = hex.size();
+    for(int i = 0; i < len; i++)     
+    {     
+        result += smallpow(16, len-i-1) * hex_char_value(hex[i]);     
+    }     
+    return result;     
+} 
+
+int main(){
+    
+    string test="40";
+    cout<<hex_to_dec(test);
 }

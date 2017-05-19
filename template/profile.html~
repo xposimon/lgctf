@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solve Me » Rank</title>
+<title>Solve Me » Profile</title>
 <link rel="icon" href="/img/favicon.png?1491134214">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/common.css?1491154688">
@@ -26,6 +26,17 @@
 			</ul>
 			</nav>
 			<div class="main-body">
+				<div class="pull-left">
+					<h3 class="clear-margin">{ name }<span class="badge">0pt</span></h3>
+					<a href="mailto:{ email }">{ email }</a>
+				</div>
+				<div class="clearfix text-right">
+					<a class="btn btn-danger btn-sm m-t-10" href="/logout">Logout</a>
+				</div>
+				<div class="progress m-t-10 m-b-10">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1800" style="width: 0%">
+					</div>
+				</div>
 				<table class="table table-striped table-hover table-responsive clear-margin">
 				<thead>
 				<tr>
@@ -33,32 +44,25 @@
 						#
 					</th>
 					<th scope="col">
-						Username
+						Problem
 					</th>
 					<th scope="col">
-						Score
-					</th>
-					<th scope="col">
-						Last Solved
+						Solved Time
 					</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr>
 					<td scope="row">
-						1
+						-
 					</td>
 					<td>
-						<a href="/profile/unusername">unusername</a>
+						-
 					</td>
 					<td>
-						1800pt
-					</td>
-					<td>
-						2017-05-02 22:43:04
+						-
 					</td>
 				</tr>
-                                { users }
 				</tbody>
 				</table>
 			</div>

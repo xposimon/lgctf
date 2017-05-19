@@ -22,7 +22,7 @@ string route::trace(string path, map<string,string> &headers)
     // images, videos, files should be different
         regex file_pattern(".*((.js)|(.css))$");
         smatch result;
-        cout<<"!!!!!!"<<path;
+        
         if (regex_match(path, result, file_pattern))
         {
             render newrender;

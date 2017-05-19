@@ -58,7 +58,6 @@
 						2017-05-02 22:43:04
 					</td>
 				</tr>
-                                { users }
 				</tbody>
 				</table>
 			</div>

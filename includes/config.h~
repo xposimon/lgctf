@@ -9,6 +9,7 @@
 #define LOG_PATH "./log/"
 #define mysql_user "root"
 #define mysql_pass "root"
+#define mysql_port 3306
 #define mysql_addr "localhost"
 #define mysql_dbname "oj_db"
 

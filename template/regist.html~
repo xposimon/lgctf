@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solve Me</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css?1491154688">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/common.js?1493715203"></script>
+</head>
+<body>
+{ message }
+<form action="/regist" method="post">
+					<div class="form-group">
+						<label class="sr-only" for="join-username">Username</label><input type="text" class="form-control" id="join-username" placeholder="Username" data-toggle="tooltip" data-placement="bottom" title="The username must be unique and 5 to 20 characters long and just alphanumeric characters(a-z, A-Z, 0-9), underscore(_), hyphen(-)." name="username">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="join-email">Email</label><input type="email" class="form-control" id="join-email" placeholder="Email" data-toggle="tooltip" data-placement="bottom" title="The email must be unique and valid, It will use when you forgot password." name="email">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="join-password">Password</label><input type="password" class="form-control" id="join-password" placeholder="Password" data-toggle="tooltip" data-placement="bottom" title="The password must be case sensitive and 6 to 50 characters long." name="password">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="join-confirm-password">Confirm Password</label><input type="password" class="form-control" id="join-confirm-password" placeholder="Confirm Password" data-toggle="tooltip" data-placement="bottom" title="The password must be case sensitive and 6 to 50 characters long, and must be equal to above password." name="confirm_password">
+<div class="pull-left text-left">
+						Do you've a problem?<br>
+						<a class="admin-contact">Contact to admin.</a>
+					</div>
+					<div class="text-right">
+						<a href="/login" class="btn btn-success">Login</a><button type="submit" class="btn btn-success">Join</button>
+					</div>
+</body>
+</html>

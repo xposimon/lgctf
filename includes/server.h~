@@ -15,7 +15,6 @@
 #include "render.h"
 #include "route.h"
 #include "Log.h"
-#include "database.h"
 using namespace std;
 
 // Functions to deal with different routes

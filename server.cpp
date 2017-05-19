@@ -66,9 +66,8 @@ void server::Listen()
         }
         
         int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);        
-        //cout<<"The answer len is: "<<response.size()<<endl; 
         session_manager();
-	string response = get_response(string(buff)); // process communication! a difficult part.
+	string response = get_response(string(buff)); // TODO multiprocess communication! a difficult part.
         if (!fork())
         {
             string ip_info = inet_ntoa(clientaddr.sin_addr);
@@ -118,12 +117,13 @@ string server::add_header(string response, string version)
     return tmp;
 }
 
+void server::set_cookie(string key, string value)
+{
+    add_response_header(string("Set-Cookie"), key+"="+value+";");
+}
+
 string server::get_response(string content)
 {
-    string id = _SESSION.newSession();
-    _SESSION[string("test")] = string("123");
-    _SESSION.save(id, session_schedule);
-
     _parser.request_parse(content);
     _GET = _parser.get("get"); _POST = _parser.get("post");
     _COOKIE = _parser.get("cookie"); _HEADER = _parser.get("header");

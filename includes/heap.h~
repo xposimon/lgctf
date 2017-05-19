@@ -88,7 +88,7 @@ T heap<T>::dequeue()
 template<typename T>
 int heap<T>::peek()
 {
-    if (isEmpty()){return 999999999;}
+    if (isEmpty()){return 99999999;}
     return data[0].priority;
 }
 
