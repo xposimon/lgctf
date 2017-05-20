@@ -10,47 +10,33 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/js/common.js?1493715203"></script>
-<script src="/js/chall.js?1491154688"></script>
 </head>
 <body>
 <div class="container-fluid v-center">
 	<div class="row">
 		<div class="col-sm-6 col-md-4 h-center">
-			<header class="text-center"><a class="text-black clear-decoration" href="/"><img class="logo-mark" src="/img/bulb.png"><span class="logo-major">Solve Me</span><br>
+			<header class="text-center"><a class="text-black clear-decoration" href="/"><span class="logo-major">Solve Me</span><br>
 			<span class="text-muted">Yet another new CTF for hackers</span></a></header><nav class="text-center m-t-10">
 			<ul class="list-inline clear-margin">
 				<li><a class="text-black" href="/">Home</a></li>
 				<li><a class="text-black" href="/chall">Challenge</a></li>
 				<li><a class="text-black" href="/rank">Rank</a></li>
-				<li><a class="text-black" href="/status">Status</a></li>
 				<li><a class="text-black" href="/profile">Profile</a></li>
 			</ul>
 			</nav>
+                        { message }
 			<div class="main-body">
-				<form id="auth-form">
+				<form method="post">
 					<div class="form-group">
 						<label class="sr-only" for="auth-flag">Flag</label>
 						<div class="input-group">
-							<input type="text" id="auth-flag" class="form-control" placeholder="flag{ ... }" data-toggle="tooltip" data-placement="bottom" title="Enter the flag."><span class="input-group-btn"><button class="auth-btn btn btn-success" type="submit">Auth</button>
+							<input type="text" id="auth-flag" name="flag"  class="form-control" placeholder="flag{ ... }" data-toggle="tooltip" data-placement="bottom" title="Enter the flag."><span class="input-group-btn"><button class="auth-btn btn btn-success" type="submit">Auth</button>
 						</div>
 						<div class="alert-parent">
 						</div>
 					</div>
-				</form>
-				<div class="panel-group clear-margin" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="heading-0">
-							<h4 class="panel-title"><a class="prob-title pull-left" data-toggle="collapse" data-parent="#accordion" href="#collapse-0" aria-expanded="true" aria-controls="collapse-0">Warm up</a><span class="pull-right">100pt</span>
-							<div class="clearfix">
-							</div>
-							</h4>
-						</div>
-						<div id="collapse-0" class="panel-collapse collapse text-left" role="tabpanel" aria-labelledby="heading-0">
-							<div class="panel-body">
-								<a href="/prob/warm_up/" target="_blank">/prob/warm_up/</a>
-							</div>
-						</div>
-					</div>
+				</form> 
+                                        { problems }
 			<p class="text-info text-center">
 				&hearts; If you want to give your idea of problem, Feel free to <a class="admin-contact">contact to admin</a>.
 			</p>
