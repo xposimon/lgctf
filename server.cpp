@@ -64,7 +64,7 @@ void server::Listen()
             cerr<<"Fail to accept raw_data!";
             continue;
         }
-        
+        memset(buff, 0, sizeof(buff));
         int end_position = recv(connect_fd, buff, MAX_BUFFER, 0);        
         session_manager();
 	string response = get_response(string(buff)); // TODO multiprocess communication! a difficult part.

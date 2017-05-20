@@ -19,7 +19,8 @@ class session
 public:
 	session();
 	void load(string session_id);
-	void save(string session_id, heap<string> &schedule, int expire_time = 60);
+	void save(string session_id, heap<string> &schedule, int expire_time = 600);
+        void insert(string key, string value);
 	string newSession();
 	string serialize(mss &session_map);
 	mss unserialize(string &content);

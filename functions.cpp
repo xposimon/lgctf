@@ -99,16 +99,18 @@ int hex_to_dec(string hex)
 string urlDecode(string str)
 {
     string decoded = str;
-    regex para_pattern("%(\\d{2})");
+    
+    regex para_pattern("%([\\dA-Fa-f]{2})");
     regex replace;
+    replace.assign("\\+");
+    string t = " ";
+    replace_all_regex(decoded, replace, t);
     smatch result;
     string::const_iterator start = str.begin();
     string::const_iterator end = str.end();
     while ( regex_search(start, end, result, para_pattern))
     {
-        cout<<result[1].str();
         int code = hex_to_dec(result[1].str());
-        cout<<code;
         char tmp = char(code);
         string to_replace = "";
         to_replace += tmp;

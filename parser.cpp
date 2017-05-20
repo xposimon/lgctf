@@ -6,7 +6,7 @@ using namespace boost;
 parser::parser()
 {  
     /*pattern init*/
-    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\./]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9%_\\.]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9%_\\.]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
+    pattern["method"] = "^(GET|POST|HEAD)\\s(/[A-Za-z0-9\\./]*)(\\?(?:[A-Za-z0-9]+=?[A-Za-z0-9%_@\\.\\-\\+]+)(?:&[A-Za-z0-9]+=?[A-Za-z0-9%_@\\+\\-\\.]+)*)?\\sHTTP/(1.1|1.0|2.0)$";
     pattern["header"] = "^([A-Za-z0-9\\-]+) *: *([^\\s]*)$";
 
 }
@@ -14,7 +14,7 @@ parser::parser()
 void parser::parse_params(string method,string params)
 {
     vector<string> parsed_params;
-    regex para_pattern("([A-Za-z0-9]+)=([A-Za-z0-9]+)");
+    regex para_pattern("([A-Za-z0-9]+)=([A-Za-z0-9%_@\\-\\+\\.]+)");
     smatch result;
     map<string, string> *para;
 
@@ -71,19 +71,16 @@ void parser::request_parse(string content)
     for (; it != lines.end(); it++)
     {
         tmp = Trim(*it);
-      
         if ( regex_match(tmp, result, re))
         {
             _HEADER[result[1].str()] = result[2].str();
-            toLowerString(tmp=result[1]);
-            
+            toLowerString(tmp=result[1].str());
             if (tmp == "cookie")
             {
-	
                 parse_params(string("COOKIE"), result[2].str());
             }
         }
-        else if (method == "POST" && regex_search(tmp, result, regex("^([A-Za-z0-9]+)=([A-Za-z0-9]+)")))
+        else if (method == "POST" && regex_search(tmp, result, regex("^([A-Za-z0-9]+)=([A-Za-z0-9%_@\\-\\+\\.]+)")))
         {
             parse_params(string("POST"), tmp);
         }

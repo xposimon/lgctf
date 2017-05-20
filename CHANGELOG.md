@@ -20,3 +20,6 @@ Fix some problems in route(trace for common file). Now the the website can be vi
 # 2017/5/17
 The session is a difficult part. The multiprocess contradicts with the sharing of session_schedule. And there is unkown pro that the session_tmp file cannot be written into 
 sub dir. 
+
+# 2017/5/21 
+The first stage of the program is finished (as a homework). But there is an interest to fix the functions of the server, if relax and willing.

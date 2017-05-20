@@ -20,7 +20,7 @@ string session::serialize(mss &session_map)
 mss session::unserialize(string &content)
 {
     Trim(content);
-    regex para_pattern("{\"([A-Za-z0-9_]+)\":\"([A-Za-z0-9_]+)\"}");
+    regex para_pattern("{\"([A-Za-z0-9_]+)\":\"([A-Za-z0-9_%@\\.\\+\\-]+)\"}");
     smatch result;
     mss para;
 
@@ -39,7 +39,6 @@ mss session::unserialize(string &content)
 void session::load(string session_id)
 {
 	ifstream session_in;
-        cout<<session_id;
         session_in.open(session_id.c_str());
 	string content;
 	session_in>>content;
@@ -79,6 +78,7 @@ string & session::operator [](string s)
 	if (cache.empty())
 	{
 	    //error;
+            return no_element;
 	}
 	mss::iterator itr = cache.find(s);
 	if (itr == cache.end())
@@ -89,6 +89,10 @@ string & session::operator [](string s)
 	}
 }
 
+void session::insert(string key, string value)
+{
+    cache[key] = value;
+}
 
 string session::newSession()
 {
